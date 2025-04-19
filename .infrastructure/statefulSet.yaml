@@ -26,13 +26,15 @@ spec:
             - name: init-sql
               mountPath: /docker-entrypoint-initdb.d
           livenessProbe:
-            httpGet:
-              path: /healthz
+            tcpSocket:
               port: 3306
+            initialDelaySeconds: 30
+            periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /healthz
+            tcpSocket:
               port: 3306
+            initialDelaySeconds: 5
+            periodSeconds: 10
           resources:
             requests:
               memory: "1Gi"
